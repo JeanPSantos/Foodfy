@@ -1,0 +1,15 @@
+{# 	<div class="modal-overlay">
+		<div class="modal">			
+			<div class="modal-content">
+				<img src="" alt="">
+				<h5></h5>
+				<h6></h6>
+			</div>
+
+			<div class="modal-footer">
+				<a class="close-modal">Fechar Modal</a>
+			</div>
+		</div>
+	</div> #}
+
+	const modalOverlay = document.querySelector('.modal-overlay');
