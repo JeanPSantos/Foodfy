@@ -13,17 +13,19 @@ body {
 }
 
 header {
-	padding: 30px 230px;
+	padding: 30px;
+	width: 100%;
+	text-align: center;
+	box-sizing: border-box;
 }
 
 .links {
-	text-align: left;
-}
-
-.links a {
 	color: #111111;
 	font-size: 16px;
 	line-height: 26px;
+}
+
+.links a {
 	margin: 0 16px;
 	text-decoration: none;
 }
