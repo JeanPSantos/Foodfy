@@ -283,3 +283,7 @@ ul {
 .data.show {
 	visibility: visible;
 }
+
+header.admin {
+	background: black;
+}
