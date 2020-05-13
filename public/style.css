@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
+:root {
+	--color-roxo: #6558C3;
+	--deletar: #DC4747;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -286,4 +291,120 @@ ul {
 
 header.admin {
 	background: black;
+}
+
+.recipes-admin {
+	max-width: 940px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+.recipes-admin .recipe {
+	margin-top: 100px;
+	display: grid;
+	grid-template-columns: 180px 1fr;
+}
+
+.recipes-admin .recipe + .recipe + .recipe {
+	margin-top: 0;
+}
+
+.recipes-admin .recipe__image-container {
+	width: 172px;
+	height: 80px;
+}
+
+.recipes-admin .recipe__image-container img {
+	margin-top: 10px;
+	border-radius: 8.57px;
+}
+
+.recipes-admin .recipe__content p + p, a {
+	padding: 5px 0 10px 0;
+	font-size: 14px;
+	line-height: 16px;
+	color: #777777;
+}
+
+.recipes-admin .recipe__content a {
+	text-decoration: none;
+	color: var(--color-roxo);
+	font-weight: bold;
+}
+
+.recipes-admin .title {
+	position: absolute;
+	margin-top: 50px;
+}
+
+.about-recipe_head {
+	margin-top: 30px;
+	margin-bottom: 20px;
+	display: grid;
+	position: relative;
+}
+
+.about-recipe_head a {
+	position: absolute;
+	right: 0;
+	background-color: var(--color-roxo);
+	color: white;
+	font-size: 16px;
+	line-height: 19px;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 6px;
+}
+
+.edit_recipe {
+	max-width: 940px;
+	margin: 0 auto;
+}
+
+.edit_recipe-title {
+	margin-top: 50px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.edit_recipe-title div:last-child {
+	text-align: right;
+}
+
+button {
+	padding: 8px 32px;
+	font-size: 16px;
+	line-height: 19px;
+	font-weight: bold;
+	color: white;
+	border-radius: 4px;
+	background-color: var(--color-roxo);
+}
+
+button.delete {
+	background-color: var(--deletar);
+	margin-right: 5px;
+}
+
+.details {
+	margin-top: 32px;
+}
+
+.details .item {
+	padding: 16px 0;
+	font-size: 16px;
+	line-height: 19px;
+	font-weight: bold;
+}
+
+input, textarea {
+	margin-top: 15px;
+	padding: 15px 20px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	font-size: 16px;
+	line-height: 19px;
+	width: 100%;
+	border-radius: 4px;
 }

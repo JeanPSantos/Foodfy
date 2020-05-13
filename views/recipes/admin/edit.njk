@@ -1,0 +1,57 @@
+{% extends 'layout_adm.njk' %}
+
+{% block head %}
+	<title>Foodfy Edit {{ recipe.title }}</title>
+{% endblock head %}
+
+{% block content %}
+	<div class="edit_recipe">
+		<section class="edit_recipe-title">
+			<div>
+				<h1>Editando receita</h1>
+			</div>
+			<div>
+				<button type="submit" class="delete">Deletar</button>
+				<button type="submit">Salvar receita</button>
+			</div>
+		</section>
+		<section class="details">
+			<form action="">
+				<div class="item">
+					<div>Imagem da receita</div>
+					<div>
+						<input type="url" name="image_url" value="" placeholder="https://">
+					</div>
+				</div>
+
+				<div class="item">
+					<div>Ingredientes</div>
+					<div>
+						<input type="text" name="ingredient" value="">
+					</div>
+					<div>
+						<a href="#">Adicionar novo ingrediente</a>
+					</div>
+				</div>
+
+				<div class="item">
+					<div>Modo de preparo</div>
+					<div>
+						<input type="text" name="preparo" value="">
+					</div>
+					<div>
+						<a href="#">Adicionar novo passo</a>
+					</div>
+				</div>
+
+				<div class="item">
+					<div>Informações adicionais</div>
+					<div>
+						<textarea name="info_add" cols="30"rows="10"></textarea>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+
+{% endblock content %}
