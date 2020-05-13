@@ -6,7 +6,10 @@
 {% endblock head %}
 
 {% block content %}
-	<main class="recipes">
+	<main class="recipes-admin">
+	<div class="title">
+		<h1>Gerenciar receitas</h1>
+	</div>
 		{% for recipe in recipes %}
 			<div class="recipe">
 				<div class="recipe__image-container">
@@ -15,10 +18,8 @@
 
 				<div class="recipe__content">
 					<p>{{ recipe.title }}</p>
-				</div>
-
-				<div class="recipe__by">
 					<p>por {{ recipe.author }}</p>
+					<a href="#">Visualizar</a>
 				</div>
 			</div>
 		{% endfor %}

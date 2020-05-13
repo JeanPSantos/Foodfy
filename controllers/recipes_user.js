@@ -7,7 +7,7 @@ exports.index = function (req, res) {
 
 // about
 exports.about =  function (req, res) {
-	return res.render('recipes/user/about', { data: data.about });
+	return res.render('recipes/user/about', { about: data.about });
 };
 
 // recipes
