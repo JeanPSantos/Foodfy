@@ -350,7 +350,8 @@ header.admin {
 	color: #777777;
 }
 
-.recipes-admin .recipe__content a {
+.recipes-admin .recipe__content a,
+.details .item a {
 	text-decoration: none;
 	color: var(--color-roxo);
 	font-weight: bold;
@@ -433,6 +434,7 @@ button.delete {
 	font-size: 16px;
 	line-height: 19px;
 	font-weight: bold;
+
 }
 
 input, textarea {
