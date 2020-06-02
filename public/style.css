@@ -2,7 +2,7 @@
 
 :root {
 	--color-roxo: #6558C3;
-	--deletar: #DC4747;
+	--delete: #DC4747;
 }
 
 * {
@@ -293,16 +293,38 @@ header.admin {
 	background: black;
 }
 
+
+.title {
+	max-width: 940px;
+	margin: 30px auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	position: relative;
+}
+
+.title a {
+	position: absolute;
+	box-sizing: border-box;
+	right: 0;
+	background-color: var(--color-roxo);
+	color: white;
+	font-size: 16px;
+	line-height: 19px;
+	font-weight: bold;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 6px;
+}
+
 .recipes-admin {
 	max-width: 940px;
-	margin: 0 auto;
+	margin: 50px auto;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 20px;
 }
 
 .recipes-admin .recipe {
-	margin-top: 100px;
 	display: grid;
 	grid-template-columns: 180px 1fr;
 }
@@ -318,7 +340,7 @@ header.admin {
 
 .recipes-admin .recipe__image-container img {
 	margin-top: 10px;
-	border-radius: 8.57px;
+	border-radius: 10px;
 }
 
 .recipes-admin .recipe__content p + p, a {
@@ -358,34 +380,48 @@ header.admin {
 	border-radius: 6px;
 }
 
-.edit_recipe {
+.admin_recipe {
 	max-width: 940px;
 	margin: 0 auto;
 }
 
-.edit_recipe-title {
+.admin_recipe-title {
 	margin-top: 50px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
 
-.edit_recipe-title div:last-child {
+.admin_recipe-title div:last-child {
 	text-align: right;
 }
 
 button {
-	padding: 8px 32px;
+	background-color: white;
+	outline: none;
+	padding: 8px 0px;
 	font-size: 16px;
 	line-height: 19px;
 	font-weight: bold;
-	color: white;
+	cursor: pointer;
+	color: var(--color-roxo);
 	border-radius: 4px;
+}
+
+button.save {
+	padding: 8px 32px;
+	color: white;
 	background-color: var(--color-roxo);
 }
 
 button.delete {
-	background-color: var(--deletar);
+	padding: 8px 32px;
+	color: white;
+	background-color: var(--delete);
 	margin-right: 5px;
+}
+
+.add {
+	margin-top: -10px;
 }
 
 .details {
@@ -407,4 +443,10 @@ input, textarea {
 	line-height: 19px;
 	width: 100%;
 	border-radius: 4px;
+	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+}
+
+textarea {
+	resize: none;	
 }

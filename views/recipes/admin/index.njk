@@ -2,14 +2,15 @@
 
 {% block head %}
 	<title>Foodfy - Receitas - Adm</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{# 	<!--link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"--> #}
 {% endblock head %}
 
 {% block content %}
-	<main class="recipes-admin">
 	<div class="title">
 		<h1>Gerenciar receitas</h1>
+		<a href="/admin/recipes/create">Nova receita</a>
 	</div>
+	<main class="recipes-admin">
 		{% for recipe in recipes %}
 			<div class="recipe">
 				<div class="recipe__image-container">
@@ -23,7 +24,6 @@
 				</div>
 			</div>
 		{% endfor %}
-
 	</main>
 
 {% endblock content %}

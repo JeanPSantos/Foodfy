@@ -8,8 +8,8 @@
 	<main>
 		<div class="about-recipe">
 		<div class="about-recipe_head">
-			<h1>Receita: {{ recipe.title }} ID: {{recipe.recipeIndex}}</h1>
-			<a href="/admin/recipes">Editar receita</a>
+			<h1>Receita: {{ recipe.title }}</h1>			
+			<a href="/admin/recipe/{{ id }}/edit">Editar receita</a>
 		</div>
 			<div class="about-recipe__image-container">
 				<img src="{{ recipe.image }}" alt="{{ recipe.title }}">
