@@ -5,19 +5,19 @@ exports.index = function (req, res) {
 	return res.render('recipes/user/index', { recipes: data.recipes });
 };
 
-// about
+// mostrar página sobre
 exports.about =  function (req, res) {
 	return res.render('recipes/user/about', { about: data.about });
 };
 
-// recipes
+// mostrar todas as receitas
 exports.recipes = function (req, res) {
 	return res.render('recipes/user/recipes', { recipes: data.recipes });
 };
 
-// recipe
-exports.recipe = function (req, res) {
-	const recipeIndex = req.params.index;
-	const recipe = data.recipes[recipeIndex];
-	return res.render ('recipes/user/recipe', { recipe: recipe });
+// mostrar a receita selecionada
+exports.show = function (req, res) {
+	const id = req.params.id; //este ID é o INDEX da receita
+	const recipe = data.recipes[id];
+	return res.render ('recipes/user/show', { recipe: recipe });
 };

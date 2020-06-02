@@ -10,7 +10,8 @@
         "1 ovo",
         "3 colheres (sopa) de farinha de trigo",
         "3 colheres (sopa) de tempero caseiro: feito com alho, sal, cebola, pimenta e cheiro verde processados no liquidificador",
-        "30 ml de água gelada"
+        "30 ml de água gelada",
+        "rtrt"
       ],
       "preparation": [
         "Misture todos os ingredientes muito bem e amasse para que fique tudo muito bem misturado.",
@@ -129,7 +130,8 @@
         "3 colheres (sopa) de açúcar 1 lata de Leite Moça",
         "1 colher (sopa) de fermento em pó",
         "manteiga para untar",
-        "açúcar de confeiteiro"
+        "açúcar de confeiteiro",
+        ""
       ],
       "preparation": [
         "Cozinhe a batata-doce numa panela de pressão, com meio litro de água, por cerca de 20 minutos. Descasque e passe pelo espremedor, ainda quente.",

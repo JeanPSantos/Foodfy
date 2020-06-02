@@ -5,53 +5,36 @@
 {% endblock head %}
 
 {% block content %}
-	<div class="edit_recipe">
-		<section class="edit_recipe-title">
+	<div class="admin_recipe">
+		<section class="admin_recipe-title">
 			<div>
 				<h1>Editando receita</h1>
 			</div>
 			<div>
-				<button type="submit" class="delete">Deletar</button>
-				<button type="submit">Salvar receita</button>
+				<button type="submit" class="delete" form="form-delete">Deletar</button>
+				<button type="submit" class="save" form="form-save">Salvar receita</button>
 			</div>
 		</section>
-		<section class="details">
-			<form action="">
-				<div class="item">
-					<div>Imagem da receita</div>
-					<div>
-						<input type="url" name="image_url" value="" placeholder="https://">
-					</div>
-				</div>
+		
+		<form method="POST" id="form-save" action="/admin/recipes?_method=PUT">
+			<section class="details">
+					<input type="hidden" name="id" value="{{ id }}">
+					{% include 'recipes/admin/fields.njk' %}
+			</section>
+		</form>
 
-				<div class="item">
-					<div>Ingredientes</div>
-					<div>
-						<input type="text" name="ingredient" value="">
-					</div>
-					<div>
-						<a href="#">Adicionar novo ingrediente</a>
-					</div>
-				</div>
-
-				<div class="item">
-					<div>Modo de preparo</div>
-					<div>
-						<input type="text" name="preparo" value="">
-					</div>
-					<div>
-						<a href="#">Adicionar novo passo</a>
-					</div>
-				</div>
-
-				<div class="item">
-					<div>Informações adicionais</div>
-					<div>
-						<textarea name="info_add" cols="30"rows="10"></textarea>
-					</div>
-				</div>
-			</form>
-		</section>
+		<form method="POST" id="form-delete" action="/admin/recipes?_method=DELETE">
+			<input type="hidden" name="id" value="{{ id }}">
+		</form>
 	</div>
+	<script>
+		const formDelete = document.querySelector('#form-delete');
+		formDelete.addEventListener('submit', function(event) {
+			const confirmation = confirm('Deseja realmente excluir?');
+			if (!confirmation) {
+				event.preventDefault();
+			}
+		});
+	</script>
 
 {% endblock content %}
