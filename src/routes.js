@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = express.Router();
-const recipes_adm = require('./controllers/recipes_adm');
-const recipes_user = require('./controllers/recipes_user');
+const recipes_adm = require('./app/controllers/recipes_adm');
+const recipes_user = require('./app/controllers/recipes_user');
 
 routes.get('/', recipes_user.index);
 routes.get('/about', recipes_user.about);
