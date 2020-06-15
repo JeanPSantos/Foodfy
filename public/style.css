@@ -437,7 +437,7 @@ button.delete {
 
 }
 
-input, textarea {
+input, textarea, select {
 	margin-top: 15px;
 	padding: 15px 20px;
 	border: 1px solid rgba(0, 0, 0, 0.5);

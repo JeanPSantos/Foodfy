@@ -1,26 +1,25 @@
 {% extends 'layout_adm.njk' %}
 
 {% block head %}
-	<title>Foodfy - Receitas - Adm</title>
+	<title>Foodfy - Chefs - Adm</title>
 {# 	<!--link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"--> #}
 {% endblock head %}
 
 {% block content %}
 	<div class="title">
-		<h1>Gerenciar receitas</h1>
-		<a href="/admin/recipes/create">Nova receita</a>
+		<h1>Gerenciar chefs</h1>
+		<a href="/admin/chefs/create">Novo chef</a>
 	</div>
 	<main class="recipes-admin">
-		{% for recipe in recipes %}
+		{% for chef in chefs %}
 			<div class="recipe">
 				<div class="recipe__image-container">
-					<img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+					<img src="{{ chef.avatar_url }}" alt="{{ chef.name }}">
 				</div>
 
 				<div class="recipe__content">
-					<p>{{ recipe.title }}</p>
-					<p>por {{ recipe.chef_name }}</p>
-					<a href="/admin/recipe/{{ recipe.id }}">Visualizar</a>
+					<p>{{ chef.name }}</p>
+					<a href="/admin/chef/{{ chef.id }}">Visualizar</a>
 				</div>
 			</div>
 		{% endfor %}

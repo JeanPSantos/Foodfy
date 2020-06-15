@@ -1,21 +1,22 @@
-const fs = require('fs');
-const data = require('../../../data.json');
-const Recipe_adm = require('../models/Recipe_adm');
 const { date } = require('../../lib/utils');
+const db = require('../../config/db');
+const data = require('../../../data.json');
+const fs = require('fs');
+/*    Vai sair */
+
+const Chef_adm = require('../models/Chef_adm');
 
 module.exports = {
 	// index
 	index(req, res) {
-		Recipe_adm.all(function(recipes) {
-			return res.render('recipes/admin/index', { recipes });
+		Chef_adm.all(function(chefs) {
+			return res.render('chefs/admin/index', { chefs });
 		});
 	},
 
 	// create
 	create(req, res) {
-		Recipe_adm.chefSelectOptions(function(options) {
-			return res.render('recipes/admin/create', { chefOptions: options });
-		});
+		return res.render('chefs/admin/create');
 	},
 
 	// cadastro
@@ -28,23 +29,33 @@ module.exports = {
 			}
 		}
 
-		Recipe_adm.create(req.body, function(recipe) {
-			return res.redirect(`/admin/recipe/${recipe.id}`);
-		});	
-	},
-	
-	// mostrar a receita selecionada
-	show(req, res) {
-		Recipe_adm.find(req.params.id, function(recipe) {
-			if(!recipe) return res.send('Receita não encontrada!');
-			
-			recipe.created_at = date(recipe.created_at).format;
-			recipe.ingredients = recipe.ingredients.split(',');
-			recipe.preparation = recipe.preparation.split(',');
-
-			return res.render('recipes/admin/show', { recipe });
+		Chef_adm.create(req.body, function(chef) {
+			return res.redirect(`/admin/chefs`);
+			//return res.redirect(`chefs/admin/${chef.id}`);
 		});
 	},
+
+
+
+
+
+	
+	// mostrar o chef selecionado
+	show(req, res) {
+		Chef_adm.find(req.params.id, function(chef) {
+			if (!chef) return res.send('Chef não encontrado!');
+
+			return res.render ('chefs/admin/show', { chef });
+		});
+	},
+	
+
+
+
+
+
+
+
 	
 	//edit
 	edit(req, res) {
