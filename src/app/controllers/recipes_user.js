@@ -1,26 +1,30 @@
 const data = require('../../../data.json');
+const Recipe_user = require('../models/Recipe_user');
+
 
 module.exports = {
-	// index
+
 	index(req, res) {
-		return res.render('recipes/user/index', { recipes: data.recipes });
+		Recipe_user.all(function(recipes) {
+			return res.render('recipes/user/index', { recipes });
+		});
+	},
+	
+	recipes(req, res) {
+		Recipe_user.all(function(recipes) {
+			return res.render('recipes/user/recipes', { recipes });
+		});
+	},
+	
+	show(req, res) {
+		Recipe_user.find(req.params.id, function(recipe) {
+			if(!recipe) return res.send('Receita não encontrada!');
+			return res.render ('recipes/user/show', { recipe });
+		});
 	},
 	
 	// mostrar página sobre
 	about(req, res) {
 		return res.render('recipes/user/about', { about: data.about });
-	},
-	
-	// mostrar todas as receitas
-	recipes(req, res) {
-		return res.render('recipes/user/recipes', { recipes: data.recipes });
-	},
-	
-	// mostrar a receita selecionada
-	show(req, res) {
-		const id = req.params.id; //este ID é o INDEX da receita
-		const recipe = data.recipes[id];
-		return res.render ('recipes/user/show', { recipe: recipe });
 	}
-
 };

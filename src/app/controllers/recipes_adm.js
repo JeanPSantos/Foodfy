@@ -1,29 +1,24 @@
-const fs = require('fs');
-const data = require('../../../data.json');
 const Recipe_adm = require('../models/Recipe_adm');
-const { date } = require('../../lib/utils');
 
 module.exports = {
-	// index
+
 	index(req, res) {
 		Recipe_adm.all(function(recipes) {
 			return res.render('recipes/admin/index', { recipes });
 		});
 	},
 
-	// create
 	create(req, res) {
 		Recipe_adm.chefSelectOptions(function(options) {
 			return res.render('recipes/admin/create', { chefOptions: options });
 		});
 	},
 
-	// cadastro
 	post(req, res) {
 		const keys = Object.keys(req.body);
 	
 		for (key of keys) {
-			if (req.body[key] == "") {
+			if (req.body[key] == '') {
 				return res.send('Preencha todos os campos!');
 			}
 		}
@@ -33,67 +28,40 @@ module.exports = {
 		});	
 	},
 	
-	// mostrar a receita selecionada
 	show(req, res) {
 		Recipe_adm.find(req.params.id, function(recipe) {
 			if(!recipe) return res.send('Receita não encontrada!');
-			
-			recipe.created_at = date(recipe.created_at).format;
-			recipe.ingredients = recipe.ingredients.split(',');
-			recipe.preparation = recipe.preparation.split(',');
-
+			//recipe.created_at = date(recipe.created_at).format;
 			return res.render('recipes/admin/show', { recipe });
 		});
 	},
 	
-	//edit
 	edit(req, res) {
-		const { id } = req.params; //este ID é o INDEX da receita
-		const recipe = data.recipes[id];
-	
-		if (!recipe) {
-			return res.send('Receita não encontrada!');
-		}
-		
-		return res.render('recipes/admin/edit', { recipe: recipe, id });
+		Recipe_adm.find(req.params.id, function(recipe) {
+			if (!recipe) return res.send('Receita não encontrada!');
+
+			Recipe_adm.chefSelectOptions(function(options) {
+				return res.render('recipes/admin/edit', { recipe, chefOptions: options });
+			});
+		});
 	},
 	
 	put(req, res) {
-		const { id } = req.body;
-		const dataRecipe = data.recipes[id];
-		let ingredients = req.body.ingredients.filter(ingredient => ingredient != "");
-		let preparation = req.body.preparation.filter(prep => prep != "");
-		const recipe = {
-			...dataRecipe,
-			...req.body,
-			ingredients,
-			preparation
-		};
-	
-		data.recipes[id] = recipe;
-	
-		fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
-			if (err) {
-				return res.send('Erro ao salvar os dados no arquivo!');
+		const keys = Object.keys(req.body);
+
+		for (key of keys) {
+			if (req.body[key] == '') {
+				return res.send('Falta preenchimento de algum campo.');
 			}
-			return res.redirect(`/admin/recipe/${id}`);
+		}
+
+		Recipe_adm.update(req.body, function() {
+			return res.redirect(`/admin/recipe/${req.body.id}`);
 		});
 	},
 	
 	delete(req, res) {
-		const { id } = req.body;
-		let index = -1;
-		const filteredRecipes = data.recipes.filter(function(recipe) {
-			index++;
-			return index != id;
-		});
-	
-		data.recipes = filteredRecipes;
-	
-		fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
-			if (err) {
-				return res.send('Erro ao salvar os dados no arquivo!');
-			}
+		Recipe_adm.delete(req.body.id, function() {
 			return res.redirect('/admin/recipes');
 		});
 	}

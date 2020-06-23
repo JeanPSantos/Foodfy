@@ -18,11 +18,11 @@
 				</div>
 
 				<div class="recipe__by">
-					<p>por {{ recipe.author }}</p>
+					<p>por {{ recipe.chef_name }}</p>
+					<a href="/recipe/{{ recipe.id }}">Visualizar</a>
 				</div>
 			</div>
 		{% endfor %}
-
 	</main>
 
 {% endblock content %}

@@ -18,23 +18,16 @@
 		
 		<form method="POST" id="form-save" action="/admin/recipes?_method=PUT">
 			<section class="details">
-					<input type="hidden" name="id" value="{{ id }}">
+					<input type="hidden" name="id" value="{{ recipe.id }}">
 					{% include 'recipes/admin/fields.njk' %}
 			</section>
 		</form>
 
 		<form method="POST" id="form-delete" action="/admin/recipes?_method=DELETE">
-			<input type="hidden" name="id" value="{{ id }}">
+			<input type="hidden" name="id" value="{{ recipe.id }}">
 		</form>
 	</div>
-	<script>
-		const formDelete = document.querySelector('#form-delete');
-		formDelete.addEventListener('submit', function(event) {
-			const confirmation = confirm('Deseja realmente excluir?');
-			if (!confirmation) {
-				event.preventDefault();
-			}
-		});
-	</script>
+
+	{% include 'confirmDelete.njk' %}
 
 {% endblock content %}

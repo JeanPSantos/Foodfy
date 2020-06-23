@@ -1,25 +1,17 @@
-const { date } = require('../../lib/utils');
-const db = require('../../config/db');
-const data = require('../../../data.json');
-const fs = require('fs');
-/*    Vai sair */
-
 const Chef_adm = require('../models/Chef_adm');
 
 module.exports = {
-	// index
+
 	index(req, res) {
 		Chef_adm.all(function(chefs) {
 			return res.render('chefs/admin/index', { chefs });
 		});
 	},
 
-	// create
 	create(req, res) {
 		return res.render('chefs/admin/create');
 	},
 
-	// cadastro
 	post(req, res) {
 		const keys = Object.keys(req.body);
 	
@@ -30,82 +22,48 @@ module.exports = {
 		}
 
 		Chef_adm.create(req.body, function(chef) {
-			return res.redirect(`/admin/chefs`);
-			//return res.redirect(`chefs/admin/${chef.id}`);
+			return res.redirect(`/admin/chef/${chef.id}`);
 		});
 	},
 
-
-
-
-
-	
-	// mostrar o chef selecionado
 	show(req, res) {
 		Chef_adm.find(req.params.id, function(chef) {
 			if (!chef) return res.send('Chef não encontrado!');
-
-			return res.render ('chefs/admin/show', { chef });
+			Chef_adm.findRecipe(req.params.id, function(recipes) {
+				return res.render ('chefs/admin/show', { chef, recipes });
+			});
 		});
 	},
-	
 
-
-
-
-
-
-
-	
-	//edit
 	edit(req, res) {
-		const { id } = req.params; //este ID é o INDEX da receita
-		const recipe = data.recipes[id];
-	
-		if (!recipe) {
-			return res.send('Receita não encontrada!');
-		}
-		
-		return res.render('recipes/admin/edit', { recipe: recipe, id });
+		Chef_adm.find(req.params.id, function(chef) {
+			if (!chef) return res.send('Chef não encontrado!');
+			return res.render('chefs/admin/edit', { chef });
+		});
 	},
-	
+
 	put(req, res) {
-		const { id } = req.body;
-		const dataRecipe = data.recipes[id];
-		let ingredients = req.body.ingredients.filter(ingredient => ingredient != "");
-		let preparation = req.body.preparation.filter(prep => prep != "");
-		const recipe = {
-			...dataRecipe,
-			...req.body,
-			ingredients,
-			preparation
-		};
-	
-		data.recipes[id] = recipe;
-	
-		fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
-			if (err) {
-				return res.send('Erro ao salvar os dados no arquivo!');
+		const keys = Object.keys(req.body);
+
+		for (key of keys) {
+			if (req.body[key] == '') {
+				return res.send('Falta preenchimento de algum campo.');
 			}
-			return res.redirect(`/admin/recipe/${id}`);
+		}
+
+		Chef_adm.update(req.body, function() {
+			return res.redirect(`/admin/chef/${req.body.id}`);
 		});
 	},
-	
+
 	delete(req, res) {
-		const { id } = req.body;
-		let index = -1;
-		const filteredRecipes = data.recipes.filter(function(recipe) {
-			index++;
-			return index != id;
-		});
-	
-		data.recipes = filteredRecipes;
-	
-		fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
-			if (err) {
-				return res.send('Erro ao salvar os dados no arquivo!');
+		Chef_adm.findDelete(req.body.id, function(counter) {
+			if (counter.recipes_chef > 0) {
+				return res.send(`Este chef possui ${counter.recipes_chef} receitas. Não podendo ser apagado!`);
 			}
-			return res.redirect('/admin/recipes');
+			Chef_adm.delete(req.body.id, function() {
+				return res.redirect('/admin/chefs');
+			});
 		});
 	}
 };

@@ -1,14 +1,10 @@
-{% extends 'layout_adm.njk' %}
+{% extends 'layout.njk' %}
 
 {% block head %}
-	<title>Foodfy - Chefs - Adm</title>
+	<title>Foodfy - Chefs</title>
 {% endblock head %}
 
 {% block content %}
-	<div class="title">
-		<h1>Gerenciar chefs</h1>
-		<a href="/admin/chefs/create">Novo chef</a>
-	</div>
 	<section class="recipes-admin">
 		{% for chef in chefs %}
 			<div class="recipe">
@@ -18,7 +14,7 @@
 
 				<div class="recipe__content">
 					<p>{{ chef.name }}</p>
-					<a href="/admin/chef/{{ chef.id }}">Visualizar</a>
+					<p>{{ chef.total_recipes }} {% if chef.total_recipes == 1 %} receita {% else %} receitas {% endif %} </p>
 				</div>
 			</div>
 		{% endfor %}

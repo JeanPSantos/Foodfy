@@ -8,23 +8,30 @@
 	<main>
 		<div class="about-recipe">
 		<div class="about-recipe_head">
-			<h1>Chef: {{ chef.name }}</h1>			
+			<h1>Chef: {{ chef.name }}</h1>
 			<a href="/admin/chef/{{ chef.id }}/edit">Editar chef</a>
 		</div>
 			<div class="about-recipe__image-container">
 				<img src="{{ chef.avatar_url }}" alt="{{ chef.name }}">
 				<h1>{{ chef.name }}</h1>
-				<p>Total de receitas {{ chef.total_recipes }}</p>
+				<p>{{ chef.total_recipes }} {% if chef.total_recipes == 1 %} receita {% else %} receitas {% endif %} </p>
 			</div>
-			<div class="about-recipe__content">			
+			<div class="about-recipe__content">
 				<h2>Receitas <span class='span'></span> </h2>
-				<div class="data show">
-					<ul>
-						{% for ingredient in recipe.ingredients %}
-							<li> {{ ingredient }}; </li>
-						{% endfor %}
-					</ul>
-				</div>
+				<section class="recipes-admin">
+					{% for recipe in recipes %}
+						<div class="recipe">
+							<div class="recipe__image-container">
+								<img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+							</div>
+
+							<div class="recipe__content">
+								<p>{{ recipe.title }}</p>
+								<a href="/admin/recipe/{{ recipe.recipe_id }}">Visualizar</a>
+							</div>
+						</div>
+					{% endfor %}
+				</section>
 			</div>
 		</div>
 	</main>

@@ -1,40 +1,33 @@
 {% extends 'layout_adm.njk' %}
 
 {% block head %}
-	<title>Foodfy Edit {{ recipe.title }}</title>
+	<title>Foodfy Edit {{ chef.name }}</title>
 {% endblock head %}
 
 {% block content %}
 	<div class="admin_recipe">
 		<section class="admin_recipe-title">
 			<div>
-				<h1>Editando receita</h1>
+				<h1>Editando chef</h1>
 			</div>
 			<div>
 				<button type="submit" class="delete" form="form-delete">Deletar</button>
-				<button type="submit" class="save" form="form-save">Salvar receita</button>
+				<button type="submit" class="save" form="form-save">Salvar chef</button>
 			</div>
 		</section>
 		
-		<form method="POST" id="form-save" action="/admin/recipes?_method=PUT">
+		<form method="POST" id="form-save" action="/admin/chefs?_method=PUT">
 			<section class="details">
-					<input type="hidden" name="id" value="{{ id }}">
-					{% include 'recipes/admin/fields.njk' %}
+					<input type="hidden" name="id" value="{{ chef.id }}">
+					{% include 'chefs/admin/fields.njk' %}
 			</section>
 		</form>
 
-		<form method="POST" id="form-delete" action="/admin/recipes?_method=DELETE">
-			<input type="hidden" name="id" value="{{ id }}">
+		<form method="POST" id="form-delete" action="/admin/chefs?_method=DELETE">
+			<input type="hidden" name="id" value="{{ chef.id }}">
 		</form>
 	</div>
-	<script>
-		const formDelete = document.querySelector('#form-delete');
-		formDelete.addEventListener('submit', function(event) {
-			const confirmation = confirm('Deseja realmente excluir?');
-			if (!confirmation) {
-				event.preventDefault();
-			}
-		});
-	</script>
+	
+	{% include 'confirmDelete.njk' %}
 
 {% endblock content %}

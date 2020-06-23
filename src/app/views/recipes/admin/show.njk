@@ -9,13 +9,12 @@
 		<div class="about-recipe">
 		<div class="about-recipe_head">
 			<h1>Receita: {{ recipe.title }}</h1>			
-			<a href="/admin/recipe/{{ id }}/edit">Editar receita</a>
+			<a href="/admin/recipe/{{ recipe.id }}/edit">Editar receita</a>
 		</div>
 			<div class="about-recipe__image-container">
 				<img src="{{ recipe.image }}" alt="{{ recipe.title }}">
 				<h1>{{ recipe.title }}</h1>
 				<p>por {{ recipe.chef_name }}</p>
-				<p>desde {{ recipe.created_at }}</p>
 			</div>
 			<div class="about-recipe__content">
 			
@@ -23,7 +22,7 @@
 				<div class="data show">
 					<ul>
 						{% for ingredient in recipe.ingredients %}
-							<li> {{ ingredient }}; </li>
+							<li> {{ ingredient }} </li>
 						{% endfor %}
 					</ul>
 				</div>

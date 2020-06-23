@@ -3,12 +3,15 @@ const routes = express.Router();
 const recipes_adm = require('./app/controllers/recipes_adm');
 const recipes_user = require('./app/controllers/recipes_user');
 const chefs_adm = require('./app/controllers/chefs_adm');
+const chefs_user = require('./app/controllers/chefs_user');
+
 
 routes.get('/', recipes_user.index);
 routes.get('/about', recipes_user.about);
 routes.get('/recipes', recipes_user.recipes);
 routes.get('/recipe/:id', recipes_user.show);
 
+routes.get('/chefs', chefs_user.chefs);
 
   /* Rotas das páginas ADMIN */
 
@@ -25,7 +28,7 @@ routes.get("/admin/chefs/create", chefs_adm.create); // Mostrar formulário de c
 routes.post("/admin/chefs", chefs_adm.post); // Cadastrar novo chef
 routes.get('/admin/chef/:id', chefs_adm.show); // Exibir detalhes de um chef
 routes.get("/admin/chef/:id/edit", chefs_adm.edit); // Mostrar formulário de edição do chef
-
-
+routes.put("/admin/chefs", chefs_adm.put); // Editar um chef
+routes.delete("/admin/chefs", chefs_adm.delete); // Deletar um chef
 
 module.exports = routes;
